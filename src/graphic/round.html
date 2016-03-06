@@ -1,0 +1,167 @@
+<%var page_title = '円形 | Canvas';%>
+<% include ../assets/include/_start %>
+<% include ../assets/include/_head_before %>
+<% include ../assets/include/_head_after %>
+<% include ../assets/include/_header %>
+
+<div class="container">
+	<div class="page-header">
+		<h1>Canvas
+			<small>検証 <a href="../">../index</a></small>
+		</h1>
+	</div>
+
+	<section>
+		<h2>円形</h2>
+		<ul>
+			<li><a href="#arc-fill" data-scroll>塗りつぶした円形</a></li>
+			<li><a href="#arc-stroke" data-scroll>線だけの円形</a></li>
+			<li><a href="#arc-fill_b" data-scroll>塗りつぶした円弧</a></li>
+			<li><a href="#arc-stroke_b" data-scroll>線だけの円弧</a></li>
+		</ul>
+
+		<section id="arc-fill" class="example-panel">
+			<h3>塗りつぶした円形</h3>
+			<p><code>arc(x, y, radius, startAngle, endAngle, anticlockwise)</code></p>
+
+<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas width="320" height="180" id="c01_01" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+(function () {
+	/* canvas要素のノードオブジェクト */
+	var canvas = document.getElementById('c01_01');
+
+	/* canvas要素の存在チェックとCanvas未対応ブラウザの対処 */
+	if (!canvas || !canvas.getContext) {
+		return false;
+	}
+
+	/* 2Dコンテキスト */
+	var ctx = canvas.getContext('2d');
+
+	/* 円形を作成 */
+	ctx.arc(160, 90, 60, 0, Math.PI*2, false);
+
+	/* 塗る */
+	ctx.fill();
+}());
+</textarea>
+</div>
+		</section>
+
+		<section id="arc-stroke" class="example-panel">
+			<h3>線だけの円形</h3>
+			<p><code>arc(x, y, radius, startAngle, endAngle, anticlockwise)</code></p>
+
+<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas id="c02_01" width="320" height="180" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+	(function () {
+		var canvas = document.getElementById('c02_01');
+		if (!canvas || !canvas.getContext) return false;
+
+		var ctx = canvas.getContext('2d');
+		ctx.arc(160, 90, 60, 0, Math.PI*2, false);
+
+		// 線を描く
+		ctx.stroke();
+	}());
+</textarea>
+</div>
+
+		</section>
+
+		<section id="arc-fill_b" class="example-panel">
+			<h3>塗りつぶした円弧</h3>
+			<p><code>arc(x, y, radius, startAngle, endAngle, anticlockwise)</code></p>
+
+			<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas width="320" height="180" id="c03_01" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+(function () {
+	/* canvas要素のノードオブジェクト */
+	var canvas = document.getElementById('c03_01');
+
+	/* canvas要素の存在チェックとCanvas未対応ブラウザの対処 */
+	if (!canvas || !canvas.getContext) {
+		return false;
+	}
+
+	/* 2Dコンテキスト */
+	var ctx = canvas.getContext('2d');
+
+	ctx.arc(160, 90, 60, 1.5, Math.PI*2, false);
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.arc(40, 40, 20, 3, Math.PI*2, false);
+	ctx.fill();
+}());
+</textarea>
+			</div>
+		</section>
+
+		<section id="arc-stroke_b" class="example-panel">
+			<h3>線だけの円弧</h3>
+			<p><code>strokeRect(x, y, width, height)</code></p>
+
+			<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas id="c04_01" width="320" height="180" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+	(function () {
+		var canvas = document.getElementById('c04_01');
+		if (!canvas || !canvas.getContext) return false;
+
+		var ctx = canvas.getContext('2d');
+		ctx.arc(160, 90, 60, 1.5, Math.PI*2, false);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.arc(80, 80, 50, 5, Math.PI*2, true);
+		ctx.stroke();
+	}());
+</textarea>
+			</div>
+
+			<hr>
+
+			<p><code>ctx.lineWidth = Number;</code></p>
+			<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas id="c04_02" width="320" height="180" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+	(function () {
+		var canvas = document.getElementById('c04_02');
+		if (!canvas || !canvas.getContext) return false;
+
+		var ctx = canvas.getContext('2d');
+
+		/* 線の太さを変える */
+		ctx.lineWidth = 10;
+
+		ctx.arc(160, 90, 60, 1.5, Math.PI*2, false);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.arc(80, 80, 50, 5, Math.PI*2, true);
+		ctx.stroke();
+	}());
+</textarea>
+			</div>
+
+		</section>
+
+	</section>
+</div>
+
+<% include ../assets/include/_footer %>
+<% include ../assets/include/_end %>

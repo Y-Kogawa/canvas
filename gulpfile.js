@@ -22,7 +22,7 @@ gulp.task('browser-sync', function () {
 		// Webアプリケーションが動作しているアドレス(例ではIPアドレス)
 		// proxy: '192.168.33.69',
 		server: {
-			baseDir: outputDir,
+			baseDir: './',
 		},
 		open: false,
 		notify: false
@@ -36,7 +36,7 @@ gulp.task('ejs', function () {
 			errorHandler: $.notify.onError("Error: <%= error.message %>") //<-
 		}))
 		.pipe($.ejs())
-		.pipe($.changed(watchFiles.ejs.dist))
+		//.pipe($.changed(watchFiles.ejs.dist))
 		.pipe(gulp.dest(watchFiles.ejs.dist));
 });
 

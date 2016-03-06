@@ -1,0 +1,25 @@
+body {
+	margin-bottom: 60px;
+}
+hr {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.canvas {
+	max-width: 100%;
+	border: 1px solid #ccc;
+}
+.text-center { text-align: center; }
+.ex-code-prettify .code-area {
+	/*height: 50px;*/
+	overflow: hidden;
+}
+
+.ex-code-prettify.open .code-area {
+	height: auto;
+	transition: height 1s;
+}
+
+.example-panel {
+	margin-top: 60px;
+}

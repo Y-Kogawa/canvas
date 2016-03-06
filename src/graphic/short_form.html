@@ -1,0 +1,143 @@
+<%var page_title = '短形 | Canvas';%>
+<% include ../assets/include/_start %>
+<% include ../assets/include/_head_before %>
+<% include ../assets/include/_head_after %>
+<% include ../assets/include/_header %>
+
+<div class="container">
+	<div class="page-header">
+		<h1>Canvas
+			<small>検証 <a href="../">../index</a></small>
+		</h1>
+	</div>
+
+	<section>
+		<h2>短形</h2>
+		<ul>
+			<li><a href="#fillRect" data-scroll>塗りつぶした矩形</a></li>
+			<li><a href="#strokeRect" data-scroll>線だけの短形</a></li>
+			<li><a href="#clearRect" data-scroll>描いた部分を短形で削除</a></li>
+		</ul>
+
+		<section id="fillRect" class="example-panel">
+			<h3>塗りつぶした矩形</h3>
+			<p>
+				<code>fillRect(x, y, width, height)</code><br>
+				<code>rect(x, y, width, height)</code><br>
+			</p>
+
+<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas width="320" height="180" id="c01_01" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+(function () {
+	/* canvas要素のノードオブジェクト */
+	var canvas = document.getElementById('c01_01');
+
+	/* canvas要素の存在チェックとCanvas未対応ブラウザの対処 */
+	if (!canvas || !canvas.getContext) {
+		return false;
+	}
+
+	/* 2Dコンテキスト */
+	var ctx = canvas.getContext('2d');
+
+	/* 短形を作成（塗もセット） */
+	ctx.fillRect(20, 20, 160, 90);
+
+	/* 短形の領域を作成して */
+	ctx.rect(200, 80, 100, 80);
+
+	/* 塗る */
+	ctx.fill();
+}());
+</textarea>
+</div>
+		</section>
+
+		<section id="strokeRect" class="example-panel">
+			<h3>線だけ</h3>
+			<p>
+				<code>strokeRect(x, y, width, height)</code><br>
+				<code>rect(x, y, width, height)</code>
+			</p>
+
+<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas id="c02_01" width="320" height="180" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+	(function () {
+		var canvas = document.getElementById('c02_01');
+		if (!canvas || !canvas.getContext) return false;
+
+		var ctx = canvas.getContext('2d');
+
+		/* 短形を作成（線もセット） */
+		ctx.strokeRect(20, 20, 160, 90);
+
+		/* 短形の領域を作成して */
+		ctx.rect(200, 80, 100, 80);
+
+		/* 線を描く */
+		ctx.stroke();
+	}());
+</textarea>
+</div>
+
+			<hr>
+
+			<p><code>ctx.lineWidth = Number;</code></p>
+			<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas id="c02_02" width="320" height="180" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+	(function () {
+		var canvas = document.getElementById('c02_02');
+		if (!canvas || !canvas.getContext) return false;
+
+		var ctx = canvas.getContext('2d');
+
+		/* 線の太さを変える */
+		ctx.lineWidth = 10;
+
+		ctx.strokeRect(20, 20, 160, 90);
+		ctx.rect(200, 80, 100, 80);
+		ctx.stroke();
+	}());
+</textarea>
+			</div>
+		</section>
+
+		<section id="clearRect" class="example-panel">
+			<h3>描いた部分を短形で削除</h3>
+			<p>
+				<code>clearRect(x, y, width, height)</code><br>
+			</p>
+
+<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas id="c03_01" width="320" height="180" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+(function () {
+	var canvas = document.getElementById('c03_01');
+	if (!canvas || !canvas.getContext) return false;
+
+	var ctx = canvas.getContext('2d');
+
+	ctx.fillRect(20, 20, 160, 90);
+	ctx.strokeRect(140, 70, 160, 90);
+	ctx.clearRect(30, 30, 70, 70);
+	ctx.clearRect(160, 50, 100, 50);
+}());
+</textarea>
+</div>
+		</section>
+	</section>
+</div>
+
+<% include ../assets/include/_footer %>
+<% include ../assets/include/_end %>

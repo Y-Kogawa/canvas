@@ -3,6 +3,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>短形 | Canvas</title>
     <link rel="stylesheet" href="/dist/assets/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/dist/assets/plugins/bootstrap/css/bootstrap-theme.min.css">
@@ -22,7 +23,7 @@
                 showDemo: true,
                 editCode: true,
                 behaveJS: true,
-                showResetButton: true,
+//                showResetButton: true,
             });
 
             $('.code').exCodePrettify({
@@ -46,14 +47,16 @@
 		<h2>短形</h2>
 		<ul>
 			<li><a href="#fillRect" data-scroll>塗りつぶした矩形</a></li>
-			<li><a href="#strokeRect" data-scroll>線だけ</a></li>
+			<li><a href="#strokeRect" data-scroll>線だけの短形</a></li>
 			<li><a href="#clearRect" data-scroll>描いた部分を短形で削除</a></li>
-			<li><a href="#short_form" data-scroll>塗りの色を指定する</a></li>
 		</ul>
 
-		<section id="fillRect">
+		<section id="fillRect" class="example-panel">
 			<h3>塗りつぶした矩形</h3>
-			<p><code>fillRect(x, y, width, height)</code></p>
+			<p>
+				<code>fillRect(x, y, width, height)</code><br>
+				<code>rect(x, y, width, height)</code><br>
+			</p>
 
 <div class="ex-code-prettify">
 <textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
@@ -72,35 +75,75 @@
 	/* 2Dコンテキスト */
 	var ctx = canvas.getContext('2d');
 
-	/* 短形を作成 */
+	/* 短形を作成（塗もセット） */
 	ctx.fillRect(20, 20, 160, 90);
+
+	/* 短形の領域を作成して */
+	ctx.rect(200, 80, 100, 80);
+
+	/* 塗る */
+	ctx.fill();
 }());
 </textarea>
 </div>
 		</section>
 
-		<section id="strokeRect">
+		<section id="strokeRect" class="example-panel">
 			<h3>線だけ</h3>
-			<p><code>strokeRect(x, y, width, height)</code></p>
+			<p>
+				<code>strokeRect(x, y, width, height)</code><br>
+				<code>rect(x, y, width, height)</code>
+			</p>
 
 <div class="ex-code-prettify">
 <textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
-	<canvas id="c01_02" width="320" height="180" class="canvas"></canvas>
+	<canvas id="c02_01" width="320" height="180" class="canvas"></canvas>
 </textarea>
 <textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
 	(function () {
-		var canvas = document.getElementById('c01_02');
+		var canvas = document.getElementById('c02_01');
 		if (!canvas || !canvas.getContext) return false;
 
 		var ctx = canvas.getContext('2d');
+
+		/* 短形を作成（線もセット） */
 		ctx.strokeRect(20, 20, 160, 90);
+
+		/* 短形の領域を作成して */
+		ctx.rect(200, 80, 100, 80);
+
+		/* 線を描く */
+		ctx.stroke();
 	}());
 </textarea>
 </div>
 
+			<hr>
+
+			<p><code>ctx.lineWidth = Number;</code></p>
+			<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas id="c02_02" width="320" height="180" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+	(function () {
+		var canvas = document.getElementById('c02_02');
+		if (!canvas || !canvas.getContext) return false;
+
+		var ctx = canvas.getContext('2d');
+
+		/* 線の太さを変える */
+		ctx.lineWidth = 10;
+
+		ctx.strokeRect(20, 20, 160, 90);
+		ctx.rect(200, 80, 100, 80);
+		ctx.stroke();
+	}());
+</textarea>
+			</div>
 		</section>
 
-		<section id="clearRect">
+		<section id="clearRect" class="example-panel">
 			<h3>描いた部分を短形で削除</h3>
 			<p>
 				<code>clearRect(x, y, width, height)</code><br>
@@ -108,11 +151,11 @@
 
 <div class="ex-code-prettify">
 <textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
-	<canvas id="c01_03" width="320" height="180" class="canvas"></canvas>
+	<canvas id="c03_01" width="320" height="180" class="canvas"></canvas>
 </textarea>
 <textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
 (function () {
-	var canvas = document.getElementById('c01_03');
+	var canvas = document.getElementById('c03_01');
 	if (!canvas || !canvas.getContext) return false;
 
 	var ctx = canvas.getContext('2d');
@@ -125,35 +168,6 @@
 </textarea>
 </div>
 		</section>
-
-		<section class="container">
-			<h3>塗りの色を指定する</h3>
-			<p>
-				<code>fillStyle = "rgb | rgba | #00000"</code><br>
-			</p>
-
-			<div class="ex-code-prettify">
-<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
-	<canvas id="c01_04" width="320" height="180" class="canvas"></canvas>
-</textarea>
-<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
-(function () {
-	var canvas = document.getElementById('c01_04');
-	if (!canvas || !canvas.getContext) return false;
-
-	var ctx = canvas.getContext('2d');
-
-	ctx.fillStyle = '#f90';
-	ctx.fillRect(20, 20, 160, 90);
-
-	ctx.fillStyle = 'rgba(100, 100, 100, 0.5)';
-	ctx.fillRect(140, 70, 160, 90);
-
-}());
-</textarea>
-			</div>
-		</section>
-
 	</section>
 </div>
 

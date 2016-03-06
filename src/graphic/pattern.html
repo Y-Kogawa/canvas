@@ -1,0 +1,133 @@
+<%var page_title = 'パターンの指定 | Canvas';%>
+<% include ../assets/include/_start %>
+<% include ../assets/include/_head_before %>
+<% include ../assets/include/_head_after %>
+<% include ../assets/include/_header %>
+
+<div class="container">
+	<div class="page-header">
+		<h1>Canvas
+			<small>検証 <a href="../">../index</a></small>
+		</h1>
+	</div>
+
+	<section>
+		<h2>パターンの指定</h2>
+		<ul>
+			<li><a href="#image" data-scroll>画像でパターン表示</a></li>
+			<li><a href="#canvas" data-scroll>Canvasでパターンを作成して表示</a></li>
+		</ul>
+
+		<section id="image" class="example-panel">
+			<h3>画像でパターン表示</h3>
+			<p>
+				<code>createPattern(imageObject, null|repeat|repeat-x|repeat-y)</code><br>
+			</p>
+
+			<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas width="320" height="180" id="c01_01" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+(function () {
+	var canvas = document.getElementById('c01_01');
+	if (!canvas || !canvas.getContext) return false;
+
+	var ctx = canvas.getContext('2d');
+
+	// Image Objectを作成して画像を読み込み
+	var img = new Image();
+	img.src = '../assets/img/pattern001.png';
+
+	// 画像の読み込みが終わったらパターンの描画
+	img.onload = function(){
+		/* パターンを作成 */
+		var ptn = ctx.createPattern(img, null);
+
+		/* 塗りにパターンを指定 */
+		ctx.fillStyle = ptn;
+		ctx.fillRect(20, 20, 280, 140);
+	}
+
+}());
+</textarea>
+			</div>
+
+		</section>
+
+		<section id="image" class="example-panel">
+			<h3>Canvasでパターンを作成して表示</h3>
+			<p>
+				<code>createPattern(imageObject, null|repeat|repeat-x|repeat-y)</code><br>
+			</p>
+
+			<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas width="320" height="180" id="c02_01" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+(function () {
+	var canvas = document.getElementById('c02_01');
+	if (!canvas || !canvas.getContext) return false;
+
+	var ctx = canvas.getContext('2d');
+
+	/* パターンを描画するCanvasを内部的に作成 */
+	var ptnCvs = document.createElement('canvas');
+		ptnCvs.width = 20;
+		ptnCvs.height = 20;
+
+	var ptnCtx = ptnCvs.getContext('2d');
+	ptnCtx.arc(10, 10, 8, 0, Math.PI*2, false);
+	ptnCtx.fillStyle = 'rgba(200, 50, 50, 1)';
+	ptnCtx.fill();
+
+
+	/* パターン画像の作成 */
+	var ptn = ctx.createPattern(ptnCvs, null);
+
+	/* 塗りにパターンを指定 */
+	ctx.fillStyle = ptn;
+	ctx.fillRect(20, 20, 280, 140);
+
+}());
+</textarea>
+			</div>
+
+			<div class="ex-code-prettify">
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'html'}">
+	<canvas width="320" height="180" id="c02_02" class="canvas"></canvas>
+</textarea>
+<textarea class="code-demo" data-ex-code-prettify-param="{codeType:'script'}">
+(function () {
+	var canvas = document.getElementById('c02_02');
+	if (!canvas || !canvas.getContext) return false;
+
+	var ctx = canvas.getContext('2d');
+
+	/* パターンを描画するCanvasを内部的に作成 */
+	var ptnCvs = document.createElement('canvas');
+		ptnCvs.width = 20;
+		ptnCvs.height = 20;
+
+	var ptnCtx = ptnCvs.getContext('2d');
+	ptnCtx.arc(10, 10, 8, 0, Math.PI*2, false);
+	ptnCtx.fillStyle = 'rgba(200, 50, 50, 1)';
+	ptnCtx.fill();
+
+	var ptn = ctx.createPattern(ptnCvs, null);
+
+	ctx.rect(20, 20, 280, 140);
+	ctx.lineWidth = 10;
+	ctx.strokeStyle = ptn;
+	ctx.stroke();
+
+}());
+</textarea>
+			</div>
+		</section>
+	</section>
+</div>
+
+<% include ../assets/include/_footer %>
+<% include ../assets/include/_end %>
